@@ -107,17 +107,7 @@ pipeline {
                         test -f package.json
                         test -f package-lock.json
 
-                        echo "Checking Next.js configuration..."
-
-                        if [ ! -f next.config.js ] && \
-                           [ ! -f next.config.mjs ] && \
-                           [ ! -f next.config.ts ]; then
-                            echo "Next.js configuration file not found"
-                            exit 1
-                        fi
-
-                        echo "Checking Node.js version..."
-                        node --version
+                        echo "Checking npm version..."
                         npm --version
 
                         echo "Checking package configuration..."
