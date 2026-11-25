@@ -1,0 +1,26 @@
+pipeline {
+  agent any
+  options { timestamps(); disableConcurrentBuilds() }
+  environment {
+    AWS_REGION = 'us-east-1'
+    ECR_REPOSITORY = 'chatflow'
+  }
+  stages {
+    stage('Checkout') { steps { checkout scm } }
+    stage('Install') { steps { sh 'npm install' } }
+    stage('Build') { steps { sh 'npm run build' } }
+    stage('Docker Build') {
+      steps {
+        sh 'docker build -t chatterly:$BUILD_NUMBER .'
+      }
+    }
+    stage('Deploy') {
+      when { branch 'main' }
+      steps {
+        echo 'Connect this stage to your EC2 deployment host after configuring Jenkins credentials.'
+        sh 'docker save chatterly:$BUILD_NUMBER -o chatflow-image.tar'
+      }
+    }
+  }
+  post { always { cleanWs() } }
+}

@@ -1,0 +1,15 @@
+services:
+  chatflow:
+    build:
+      context: .
+      args:
+        VITE_API_URL: ${VITE_API_URL:-}
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      CLIENT_ORIGIN: "*"
+    volumes:
+      - chatflow_uploads:/app/uploads
+volumes:
+  chatflow_uploads:
