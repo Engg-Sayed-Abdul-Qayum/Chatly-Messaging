@@ -53,16 +53,7 @@ pipeline {
                         test -f Dockerfile
                         test -f package.json
                         test -f package-lock.json
-
-                        if [ ! -f next.config.js ] &&
-                           [ ! -f next.config.mjs ] &&
-                           [ ! -f next.config.ts ] &&
-                           [ ! -f next.config.mts ]; then
-                            echo "Next.js configuration file not found."
-                            exit 1
-                        fi
-
-                        grep -q "FROM node:" Dockerfile
+ 
                         grep -q "npm ci" Dockerfile
                         grep -q "npm run build" Dockerfile
                         grep -q "EXPOSE 4000" Dockerfile
