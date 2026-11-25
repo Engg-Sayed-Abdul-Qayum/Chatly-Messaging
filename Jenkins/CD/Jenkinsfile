@@ -54,7 +54,7 @@ pipeline {
                         test -f package.json
                         test -f package-lock.json
  
-                        grep -q "npm ci" Dockerfile
+                        grep -q "npm install" Dockerfile
                         grep -q "npm run build" Dockerfile
                         grep -q "EXPOSE 4000" Dockerfile
 
